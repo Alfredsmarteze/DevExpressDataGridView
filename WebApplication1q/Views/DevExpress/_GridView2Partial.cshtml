@@ -1,0 +1,50 @@
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridView2";
+        settings.CallbackRouteValues = new { Controller = "DevExpress", Action = "GridView2Partial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "DevExpress", Action = "GridView2PartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "DevExpress", Action = "GridView2PartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "DevExpress", Action = "GridView2PartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        //settings.CommandColumn.Visible = true;
+        //settings.CommandColumn.ShowNewButton = true;
+        // settings.CommandColumn.ShowDeleteButton = true;
+        //settings.CommandColumn.ShowEditButton = true;
+
+        settings.KeyFieldName = "Id";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+        settings.Settings.ShowFilterRowMenu = true;
+        settings.Settings.ShowPreview = true;
+        settings.Settings.UseFixedTableLayout = true;
+
+
+        //settings.Columns.Add("Id");
+        settings.Columns.Add("Product_Name","Product Name");
+        settings.Columns.Add("Vehicle_Name", "Vehicle Name");
+        settings.Columns.Add("Driver_Name", "Driver Name");
+        settings.Columns.Add("Gender", "Gender");
+        settings.Columns.Add("Items", "Items");
+        settings.Columns.Add("Location", "Location");
+        settings.Columns.Add("Departure_Time", "Departure Time");
+        settings.Columns.Add("Arrival_Time", "Arrival Time");
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()
